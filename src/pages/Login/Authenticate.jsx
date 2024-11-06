@@ -47,8 +47,11 @@ export default function Authenticate() {
                         <Input.Password placeholder="Digite sua senha"/>
                     </Form.Item>
                     <Space direction="vertical" style={{width: "100%"}} wrap={true}>
-                        <Button style={{float: "right"}} type="link" onClick={redirect}>Não tem conta? Crie
-                            aqui!</Button>
+                        <Button
+                            style={{float: "right"}}
+                            type="link"
+                            onClick={redirect}
+                        >Não tem conta? Crieaqui.</Button>
                     </Space>
                     <Flex justify="space-between">
                         <Button block type="primary" htmlType="submit">

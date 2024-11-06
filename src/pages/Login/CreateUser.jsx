@@ -69,7 +69,7 @@ export default function CreateUser() {
                     </Space>
                     <Flex justify="space-between">
                         <Button block type="primary" htmlType="submit">
-                            Criar Conta
+                            Criar Conta.
                         </Button>
                     </Flex>
                 </Form>
