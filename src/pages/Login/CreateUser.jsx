@@ -1,12 +1,13 @@
 import {Button, Card, Flex, Form, Input, Space, Typography} from "antd";
 import {useHistory} from "react-router-dom";
+import {API} from "../../util/constsUtils";
 
 export default function CreateUser() {
     const [form] = Form.useForm();
     const history = useHistory();
 
-    function handleSubmit() {
-
+    async function handleSubmit() {
+        const response = await API.auth.createUserService.index();
     }
 
     function redirect() {

@@ -1,13 +1,17 @@
-class ApiService {
-    constructor(baseURL, token = null) {
-        this.baseURL = baseURL;
-        this.token = token;
+import { message } from 'antd';
+
+export class ApiService {
+    constructor(api, baseURL) {
+        const gatewayURL = "http://localhost:8765";
+        this.baseURL = gatewayURL + baseURL;
     }
 
-    async request(endpoint, {method = 'GET', headers = {}, body = null} = {}) {
+    async request(endpoint, { method = 'GET', headers = {}, body = null } = {}) {
+        const token = localStorage.getItem('token');
+
         const defaultHeaders = {
             'Content-Type': 'application/json',
-            ...(this.token ? {'Authorization': `Bearer ${this.token}`} : {}),
+            ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
             ...headers
         };
 
@@ -24,31 +28,37 @@ class ApiService {
             const response = await fetch(`${this.baseURL}${endpoint}`, config);
 
             if (!response.ok) {
-                throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+                message.open({
+                    type: 'error',
+                    content: response.statusText,
+                });
             }
 
             const data = await response.json();
             return data;
 
         } catch (error) {
-            console.error(`Erro na requisição ${method} ${endpoint}:`, error);
-            throw error; // Rethrow para permitir captura em outros locais
+            message.open({
+                type: 'error',
+                content: error.message || 'An unknown error occurred',
+            });
         }
     }
 
     get(endpoint, headers = {}) {
-        return this.request(endpoint, {method: 'GET', headers});
+        console.log(endpoint)
+        return this.request(endpoint, { method: 'GET', headers });
     }
 
     post(endpoint, body, headers = {}) {
-        return this.request(endpoint, {method: 'POST', headers, body});
+        return this.request(endpoint, { method: 'POST', headers, body });
     }
 
     put(endpoint, body, headers = {}) {
-        return this.request(endpoint, {method: 'PUT', headers, body});
+        return this.request(endpoint, { method: 'PUT', headers, body });
     }
 
     delete(endpoint, headers = {}) {
-        return this.request(endpoint, {method: 'DELETE', headers});
+        return this.request(endpoint, { method: 'DELETE', headers });
     }
 }
