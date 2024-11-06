@@ -1,3 +1,25 @@
 html {
     font-family: 'open-sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #FAFAFA;
+    height: 100%;
+}
+
+body, #root {
+    width: 100%;
+    padding: 0 10%;
+}
+
+.container-login {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-card-login {
+    width: 500px;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
